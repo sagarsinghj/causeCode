@@ -1,0 +1,40 @@
+<!doctype html>
+<html ng-app="storeFinder">
+<head>
+	<meta charset="utf-8">
+	<title>Store Finder</title>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+	<script src="controllers/indexController.js"></script>
+
+</head>
+<body ng-controller="mainController">
+			<h1 align="center">Stores Finder</h1>
+				<form align="center">
+					<table align="center">
+					<tr>
+						<th>Store Name</th>
+						<th>Latitude</th>
+						<th>Longitude</th>
+					</tr>
+					<tr>
+						<td><input type="text" ng-model="formData.storeName"> </td>
+						<td><input type="text" ng-model="formData.lat"> </td>
+						<td><input type="text" ng-model="formData.lon"> </td>
+						<td><button type="submit"  ng-click="saveStore()">Add</button></td>
+					</tr>
+					<tr></tr><tr></tr>
+					<tr>
+					<td></td>
+						<th>Store List</th>
+					<td></td>
+					</tr>
+						<tr></tr><tr></tr>
+					<tr>
+					<td></td>
+						<th><!-- here list the name of the stores --> </th>
+					<td></td>
+					</tr>
+					</table>
+				</form>
+</body>
+</html>
