@@ -38,8 +38,23 @@
 					</table>
 					
 				</form>
-				<table align="left">
-				<td><div ng-repeat = "store in stores">{{ store.storeName }}</div></td>
+				
+				<table align="center" border="1" cellpadding="10">
+				<tr>
+					<th>Store Name</th>
+					<th>Latitude</th>
+					<th>Longitude</th>
+					<th>Delete</th>
+					<th>Edit</th>
+				</tr>
+				<tr ng-repeat = "store in stores">
+					<td>{{ store.storeName }}</td>
+					<td>{{ store.position[0] }}</td>
+					<td>{{ store.position[1] }}</td>
+					<td><button ng-click="deleteStore(store._id)">Delete</button></td>
+					<td><button ng-click="">Edit</button></td>
+				</tr>
 				</table>
+				
 </body>
 </html>

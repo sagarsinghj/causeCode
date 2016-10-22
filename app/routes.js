@@ -7,6 +7,8 @@ module.exports = function(app) {
 	app.post('/api/saveStores', storeController.saveStore);
 	// get all the store from database
 	app.get('/api/getStores', storeController.getStores);
+	// delete a store from database
+	app.delete('/api/deleteStore/:storeId', storeController.deleteStore);
 
 	app.get('*', function(req, res) {
 		res.sendfile('./public/index.html');

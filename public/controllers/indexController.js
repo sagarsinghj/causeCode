@@ -14,7 +14,7 @@ function mainController($scope, $http) {
 			});
 	};
 
-	$scope.getStore = function() { console.log("calling")
+	$scope.getStore = function() {
 		$http.get('/api/getStores')
 			.success(function(data) {
 				$scope.stores = data;
@@ -22,5 +22,15 @@ function mainController($scope, $http) {
 			.error(function(data) {
 				console.log('Error: ' + data);
 			});
+	};
+
+	$scope.deleteStore = function(storeId) {
+	$http.delete('/api/deleteStore/' + storeId)
+		.success(function(data) {
+			$scope.stores = data;
+		})
+		.error(function(data) {
+			console.log('Error: ' + data);
+		});
 	};
 }
