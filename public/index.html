@@ -28,13 +28,18 @@
 						<th>Store List</th>
 					<td></td>
 					</tr>
-						<tr></tr><tr></tr>
+					<tr></tr><tr></tr>
 					<tr>
 					<td></td>
-						<th><!-- here list the name of the stores --> </th>
+						<th><button ng-click="getStore()">Show Stores</button></th>
 					<td></td>
 					</tr>
+					<tr></tr><tr></tr>
 					</table>
+					
 				</form>
+				<table align="left">
+				<td><div ng-repeat = "store in stores">{{ store.storeName }}</div></td>
+				</table>
 </body>
 </html>
