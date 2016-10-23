@@ -20,7 +20,8 @@
 						<td><input type="text" ng-model="formData.storeName"> </td>
 						<td><input type="text" ng-model="formData.lat"> </td>
 						<td><input type="text" ng-model="formData.lon"> </td>
-						<td><button type="submit"  ng-click="saveStore()">Add</button></td>
+						<td><button type="submit"  ng-click="saveStore()" ng-disabled="formData.id">Add</button></td>
+						<td ng-if="formData.id"><button type="submit"  ng-click="updateStore()">Update</button></td>
 					</tr>
 					<tr></tr><tr></tr>
 					<tr>
