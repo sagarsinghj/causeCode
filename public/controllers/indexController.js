@@ -33,4 +33,21 @@ function mainController($scope, $http) {
 			console.log('Error: ' + data);
 		});
 	};
+
+	$scope.editStore = function(store) {
+		$scope.formData.storeName = store.storeName;
+		$scope.formData.lat = store.position[0];
+		$scope.formData.lon = store.position[1];
+	};
+
+	$scope.updateStore = function(storeId) {
+	$http.put('/api/deleteStore/' + storeId, $scope.formData)
+		.success(function(data) {
+			$scope.formData = {};
+			$scope.stores = data;
+		})
+		.error(function(data) {
+			console.log('Error: ' + data);
+		});
+	};
 }

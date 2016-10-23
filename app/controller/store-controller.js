@@ -41,3 +41,28 @@ exports.deleteStore = function(req,res){
 		});
 	});
 }
+
+
+exports.updateStore = function(req,res){
+	var id = req.params.storeId;
+	stores.findById(id, function(err, store) {
+		if (err)
+			res.send(err);
+
+		store.storeName = req.body.storeName;
+		store.position[0] = req.body.
+		store.position[1] = req.body.
+
+		store.save(function(err) {
+			if (err){
+				res.send(err)
+			}else{
+				stores.find(function(err, storeAll) {
+				if (err)
+					res.send(err)
+					res.json(storeAll);
+				});
+			}
+		});
+	});
+}

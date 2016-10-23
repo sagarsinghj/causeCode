@@ -9,6 +9,8 @@ module.exports = function(app) {
 	app.get('/api/getStores', storeController.getStores);
 	// delete a store from database
 	app.delete('/api/deleteStore/:storeId', storeController.deleteStore);
+	// update a store from database
+	app.put('/api/updateStore/:storeId', storeController.updateStore);
 
 	app.get('*', function(req, res) {
 		res.sendfile('./public/index.html');
