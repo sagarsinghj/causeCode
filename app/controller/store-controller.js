@@ -1,4 +1,5 @@
 var stores = require('../models/stores');
+var zipcodes = require('zipcodes');
 
 
 exports.saveStore = function(req,res){
@@ -43,12 +44,12 @@ exports.deleteStore = function(req,res){
 }
 
 
-exports.updateStore = function(req,res){ console.log(req.body, req.params.storeId)
+exports.updateStore = function(req,res){
 	var id = req.params.storeId;
 	var pos = [req.body.lat,req.body.lon];
 	stores.update({_id:id}, 
 		{$set:{storeName : req.body.storeName, position : pos}}, 
-		function(err, store) { console.log(store)
+		function(err, store) {
 		if (err)
 			res.send(err);
 		
@@ -58,4 +59,14 @@ exports.updateStore = function(req,res){ console.log(req.body, req.params.storeI
 			res.json(storeAll);
 		});
 	});
+}
+
+exports.findStore = function(req,res){
+	var zipcode = req.body.zipcode;
+	var distance = req.body.distance;
+
+	var location = zipcodes.lookup(90210);
+
+	console.log(hills);
+
 }

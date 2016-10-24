@@ -11,6 +11,8 @@ module.exports = function(app) {
 	app.delete('/api/deleteStore/:storeId', storeController.deleteStore);
 	// update a store from database
 	app.put('/api/updateStore/:storeId', storeController.updateStore);
+	// finding the store locations withiin given range in miles
+	app.post('/api/findStore', storeController.findStore);
 
 	app.get('*', function(req, res) {
 		res.sendfile('./public/index.html');

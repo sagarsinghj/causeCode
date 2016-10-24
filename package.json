@@ -1,5 +1,5 @@
 {
-  "name"         : "Store finder",
+  "name"         : "Store-finder",
   "version"      : "0.0.0",
   "description"  : "Cause code challange.",
   "main"         : "server.js",
