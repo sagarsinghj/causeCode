@@ -51,4 +51,19 @@ function mainController($scope, $http) {
 			console.log('Error: ' + data);
 		});
 	};
+
+	$scope.findStores = function() {
+	$http.post('/api/findStore', $scope.fdata)
+		.success(function(data) {
+			$scope.fdata = {};
+			$scope.sdata = data.stores;
+			$scope.zipcodeCity = data.zipcodeCity;
+			$scope.zipcodeState = data.zipcodeState;
+			$scope.zipcode = data.zipcode;
+			$scope.distance = data.distance;
+		})
+		.error(function(data) {
+			$scope.sdata = data;
+		});
+	};
 }

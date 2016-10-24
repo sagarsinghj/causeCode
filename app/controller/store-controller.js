@@ -89,7 +89,14 @@ exports.findStore = function(req,res){
 				if(storesInRange == null || storesInRange.length == 0){
 					res.send(404,{'message':'No Stores found wihin given distance'});
 				}else{
-					res.send(200,storesInRange);
+					var responseData = {
+						stores:storesInRange,
+						zipcodeCity:locCity,
+						zipcodeState:locState,
+						zipcode:zipcode,
+						distance:distance
+					};
+					res.send(200,responseData);
 				}
 			}
 		});

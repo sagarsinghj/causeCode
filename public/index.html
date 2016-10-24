@@ -8,7 +8,7 @@
 
 </head>
 <body ng-controller="mainController">
-			<h1 align="center">Stores Finder</h1>
+			<h1 align="center">Add Stores</h1>
 				<form align="center">
 					<table align="center">
 					<tr>
@@ -56,6 +56,40 @@
 					<td><button ng-click="editStore(store)">Edit</button></td>
 				</tr>
 				</table>
+
+				<hr size=2>
+				<h1 align="center">Find Stores</h1>
+
+				<table align="center">
+					<tr>
+						<td>Enter Zipcode:<input type="text" ng-model="fdata.zipcode"> </td>
+						<td>Enter Distance:<input type="text" ng-model="fdata.distance"> </td>
+						<td><button ng-click="findStores()">Search</button></td>
+					</tr>
+				</table>
+
+				<table align="center" border="1" cellpadding="10">
+				<tr>
+					<th>Zip Code</th>
+					<th>City</th>
+					<th>State</th>
+				</tr>
+				<tr>
+					<td>{{ zipcode }}</td>
+					<td>{{ zipcodeCity }}</td>
+					<td>{{ zipcodeState }}</td>
+				</tr>
+				</table>
+				
+					<p align="center"><font size="5"><u> Store Name </font></u></p> 
+			
+					<div align="center">
+						<div ng-if="sdata.message">{{ sdata.message }}</div>
+						<div ng-if="!sdata.message">
+							<li ng-repeat = "store in sdata">{{ store.storeName }}</li>
+						</div>
+						
+					</div>
 				
 </body>
 </html>
