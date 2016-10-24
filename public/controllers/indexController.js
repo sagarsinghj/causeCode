@@ -3,6 +3,14 @@ var scotchTodo = angular.module('storeFinder', []);
 function mainController($scope, $http) {
 	$scope.formData = {};
 
+	$http.get('/api/getStores')
+		.success(function(data) {
+			$scope.stores = data;
+		})
+		.error(function(data) {
+		console.log('Error: ' + data);
+	});
+
 	$scope.saveStore = function() {
 		$http.post('/api/saveStores', $scope.formData)
 			.success(function(data) {
@@ -10,17 +18,7 @@ function mainController($scope, $http) {
 				$scope.stores = data;
 			})
 			.error(function(data) {
-				console.log('Error: ' + data);
-			});
-	};
-
-	$scope.getStore = function() {
-		$http.get('/api/getStores')
-			.success(function(data) {
 				$scope.stores = data;
-			})
-			.error(function(data) {
-				console.log('Error: ' + data);
 			});
 	};
 
@@ -30,7 +28,7 @@ function mainController($scope, $http) {
 			$scope.stores = data;
 		})
 		.error(function(data) {
-			console.log('Error: ' + data);
+			$scope.stores = data;
 		});
 	};
 
@@ -48,7 +46,7 @@ function mainController($scope, $http) {
 			$scope.stores = data;
 		})
 		.error(function(data) {
-			console.log('Error: ' + data);
+			$scope.stores = data;
 		});
 	};
 

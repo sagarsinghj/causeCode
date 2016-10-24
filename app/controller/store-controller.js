@@ -3,6 +3,18 @@ var zipcodes = require('zipcodes');
 
 
 exports.saveStore = function(req,res){
+	if(!req.body.storeName){
+		res.status(404).send({'message':'Enter valid Store name'});
+		return;
+	}
+	if(!req.body.lat || isNaN(req.body.lat)){
+		res.status(404).send({'message':'Enter valid latitude value'});
+		return;
+	}
+	if(!req.body.lon || isNaN(req.body.lon)){
+		res.status(404).send({'message':'Enter valid longitude value'});
+		return;
+	}
 	stores.create({
 		storeName : req.body.storeName,
 		position:[req.body.lat, req.body.lon]
@@ -46,7 +58,17 @@ exports.deleteStore = function(req,res){
 
 exports.updateStore = function(req,res){
 	var id = req.params.storeId;
+	if(!req.body.storeName || !isNaN(req.body.storeName)){
+		res.send(404,{'message':'Enter valid Store name value'}); return;
+	}
+	if(!req.body.lat || isNaN(req.body.lat)){
+		res.send(404,{'message':'Enter valid latitude value'}); return;
+	}
+	if(!req.body.lon || isNaN(req.body.lon)){
+		res.send(404,{'message':'Enter valid longitude value'}); return;
+	}
 	var pos = [req.body.lat,req.body.lon];
+
 	stores.update({_id:id}, 
 		{$set:{storeName : req.body.storeName, position : pos}}, 
 		function(err, store) {
@@ -64,7 +86,12 @@ exports.updateStore = function(req,res){
 exports.findStore = function(req,res){
 	var zipcode = req.body.zipcode;
 	var distance = req.body.distance;
-
+	if(zipcode == null || isNaN(zipcode)){
+		res.send(404,{'message':'Enter valid zipcode'}); return;
+	}
+	if(distance == null || isNaN(distance) ){
+		res.send(404,{'message':'Enter valid distance'}); return;
+	}
 	var p = new Promise(function(resolve, reject){
 		var location = zipcodes.lookup(zipcode);
 		if(location) {
@@ -87,7 +114,7 @@ exports.findStore = function(req,res){
 				res.send(err)
 			}else{
 				if(storesInRange == null || storesInRange.length == 0){
-					res.send(404,{'message':'No Stores found wihin given distance'});
+					res.send(404,{'message':'No Stores found wihin given distance'}); return;
 				}else{
 					var responseData = {
 						stores:storesInRange,

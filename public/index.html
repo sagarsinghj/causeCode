@@ -9,7 +9,7 @@
 </head>
 <body ng-controller="mainController">
 			<h1 align="center">Add Stores</h1>
-				<form align="center">
+				<form align="center" name="myForm">
 					<table align="center">
 					<tr>
 						<th>Store Name</th>
@@ -17,10 +17,10 @@
 						<th>Longitude</th>
 					</tr>
 					<tr>
-						<td><input type="text" ng-model="formData.storeName"> </td>
-						<td><input type="text" ng-model="formData.lat"> </td>
-						<td><input type="text" ng-model="formData.lon"> </td>
-						<td><button type="submit"  ng-click="saveStore()" ng-disabled="formData.id">Add</button></td>
+						<td><input type="text" ng-model="formData.storeName" required> </td>
+						<td><input type="text" ng-model="formData.lat" required> </td>
+						<td><input type="text" ng-model="formData.lon" required> </td>
+						<td><button type="submit"  class="btn btn-success" ng-click="saveStore()" ng-disabled="formData.id || myForm.$invalid">Add</button></td>
 						<td ng-if="formData.id"><button type="submit"  ng-click="updateStore()">Update</button></td>
 					</tr>
 					<tr></tr><tr></tr>
@@ -29,33 +29,32 @@
 						<th>Store List</th>
 					<td></td>
 					</tr>
-					<tr></tr><tr></tr>
-					<tr>
-					<td></td>
-						<th><button ng-click="getStore()">Show Stores</button></th>
-					<td></td>
-					</tr>
-					<tr></tr><tr></tr>
 					</table>
 					
 				</form>
-				
-				<table align="center" border="1" cellpadding="10">
-				<tr>
-					<th>Store Name</th>
-					<th>Latitude</th>
-					<th>Longitude</th>
-					<th>Delete</th>
-					<th>Edit</th>
-				</tr>
-				<tr ng-repeat = "store in stores">
-					<td>{{ store.storeName }}</td>
-					<td>{{ store.position[0] }}</td>
-					<td>{{ store.position[1] }}</td>
-					<td><button ng-click="deleteStore(store._id)">Delete</button></td>
-					<td><button ng-click="editStore(store)">Edit</button></td>
-				</tr>
-				</table>
+				<div ng-if="stores.message" align="center">
+					<span>{{ stores.message }}</span>
+				</div>
+				<div ng-if="!stores.message">
+					<table align="center" border="1" cellpadding="10">
+					<tr>
+						<th>Store Name</th>
+						<th>Latitude</th>
+						<th>Longitude</th>
+						<th>Delete</th>
+						<th>Edit</th>
+					</tr>
+					<tr ng-repeat = "store in stores">
+						<td>{{ store.storeName }}</td>
+						<td>{{ store.position[0] }}</td>
+						<td>{{ store.position[1] }}</td>
+						<td><button ng-click="deleteStore(store._id)">Delete</button></td>
+						<td><button ng-click="editStore(store)">Edit</button></td>
+					</tr>
+					</table>
+				</div>
+		
+			
 
 				<hr size=2>
 				<h1 align="center">Find Stores</h1>
@@ -81,14 +80,13 @@
 				</tr>
 				</table>
 				
-					<p align="center"><font size="5"><u> Store Name </font></u></p> 
+					<p align="center"><font size="4"><u> Below are the Store names within {{ distance }} miles </font></u></p> 
 			
 					<div align="center">
 						<div ng-if="sdata.message">{{ sdata.message }}</div>
 						<div ng-if="!sdata.message">
 							<li ng-repeat = "store in sdata">{{ store.storeName }}</li>
 						</div>
-						
 					</div>
 				
 </body>
