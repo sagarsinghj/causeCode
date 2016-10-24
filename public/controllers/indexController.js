@@ -1,6 +1,6 @@
-var scotchTodo = angular.module('storeFinder', []);
 
-function mainController($scope, $http) {
+
+angular.module('storeFinder', []).controller("mainController",  function($scope, $http) {
 	$scope.formData = {};
 
 	$http.get('/api/getStores')
@@ -64,4 +64,4 @@ function mainController($scope, $http) {
 			$scope.sdata = data;
 		});
 	};
-}
+})
