@@ -66,7 +66,7 @@ exports.findStore = function(req,res){
 	var distance = req.body.distance;
 
 	var p = new Promise(function(resolve, reject){
-		var location = zipcodes.lookup(9210);
+		var location = zipcodes.lookup(zipcode);
 		if(location) {
 			resolve(location);
 		}else {
@@ -75,9 +75,27 @@ exports.findStore = function(req,res){
 	});
 
 	p.then(function(loc){
-		res.send(200,loc);
+		var lat = loc.latitude;
+		var lon = loc.longitude;
+		var locCity = loc.city;
+		var locState = loc.state;
+		var distInMiles = distance/3963.2;
+
+		var query = {'position': { '$geoWithin': { '$center': [[lat, lon] ,distInMiles] } } };
+		stores.find(query,  function(err, storesInRange) {
+			if (err){
+				res.send(err)
+			}else{
+				if(storesInRange == null || storesInRange.length == 0){
+					res.send(404,{'message':'No Stores found wihin given distance'});
+				}else{
+					res.send(200,storesInRange);
+				}
+			}
+		});
+
 	}).catch(function(error){
-		res.send(405,{'message':'Not Found'});
+		res.send(405,{'message':'No location found for given zipcode'});
 	});
 
 }
