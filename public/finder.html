@@ -1,0 +1,52 @@
+<!doctype html>
+<html ng-app="storeFinder">
+<head>
+	<meta charset="utf-8">
+	<title>Store Finder</title>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+	<script src="controllers/indexController.js"></script>
+
+</head>
+<body ng-controller="mainController">
+		<h1 align="center">CauseCode Challange</h1>
+				<hr size=2>
+				<h3 align="center"><a href="index.html"> Add Stores</a> &nbsp;&nbsp;&nbsp;
+			 	<a href="finder.html"> Find Stores</h3></a>
+
+				<table align="center">
+					<tr>
+						<th>Enter Zipcode</th>
+						<th>Enter Distance</th>
+
+					</tr>
+					<tr>
+						<td><input type="text" ng-model="fdata.zipcode"> </td>
+						<td><input type="text" ng-model="fdata.distance"> </td>
+						<td><button ng-click="findStores()">Search</button></td>
+					</tr>
+				</table>
+				<br><br>
+				<table align="center" border="1" cellpadding="10">
+				<tr>
+					<th>Zip Code</th>
+					<th>City</th>
+					<th>State</th>
+				</tr>
+				<tr>
+					<td>{{ zipcode }}</td>
+					<td>{{ zipcodeCity }}</td>
+					<td>{{ zipcodeState }}</td>
+				</tr>
+				</table>
+				
+					<p align="center"><font size="4"><u> Below are the Store names within {{ distance }} miles </font></u></p> 
+			
+					<div align="center">
+						<div ng-if="sdata.message">{{ sdata.message }}</div>
+						<div ng-if="!sdata.message">
+							<li ng-repeat = "store in sdata">{{ store.storeName }}</li>
+						</div>
+					</div>
+				<hr size=2>
+</body>
+</html>
