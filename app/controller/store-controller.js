@@ -65,8 +65,19 @@ exports.findStore = function(req,res){
 	var zipcode = req.body.zipcode;
 	var distance = req.body.distance;
 
-	var location = zipcodes.lookup(90210);
+	var p = new Promise(function(resolve, reject){
+		var location = zipcodes.lookup(9210);
+		if(location) {
+			resolve(location);
+		}else {
+			reject(null);
+		}
+	});
 
-	console.log(hills);
+	p.then(function(loc){
+		res.send(200,loc);
+	}).catch(function(error){
+		res.send(405,{'message':'Not Found'});
+	});
 
 }
