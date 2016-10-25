@@ -4,29 +4,38 @@ var zipcodes = require('zipcodes');
 
 exports.saveStore = function(req,res){
 	if(!req.body.storeName){
-		res.status(404).send({'message':'Enter valid Store name'});
+		res.status(400).send({'message':'Enter valid Store name'});
 		return;
 	}
 	if(!req.body.lat || isNaN(req.body.lat)){
-		res.status(404).send({'message':'Enter valid latitude value'});
+		res.status(400).send({'message':'Enter valid latitude value'});
 		return;
 	}
 	if(!req.body.lon || isNaN(req.body.lon)){
-		res.status(404).send({'message':'Enter valid longitude value'});
+		res.status(400).send({'message':'Enter valid longitude value'});
 		return;
 	}
-	stores.create({
-		storeName : req.body.storeName,
-		position:[req.body.lon, req.body.lat]
-	}, function(err, store) {
-		if (err)
-			res.send(err);
-		
-		stores.find(function(err, storeAll) {
-			if (err)
-				res.send(err)
-			res.json(storeAll);
-		});
+
+	var storeDoc = {
+						storeName : req.body.storeName,
+						position:[req.body.lon, req.body.lat]
+				   }
+	stores.find(storeDoc,function(err, allStores) {
+		if(allStores){
+			res.status(400).send({'message':'Store already exists'});
+			return;
+		}else{
+			stores.create(storeDoc, function(err, store) {
+				if (err)
+					res.send(err);
+				
+				stores.find(function(err, storeAll) {
+					if (err)
+						res.send(err)
+					res.json(storeAll);
+				});
+			});
+		}
 	});
 }
 
@@ -59,13 +68,13 @@ exports.deleteStore = function(req,res){
 exports.updateStore = function(req,res){
 	var id = req.params.storeId;
 	if(!req.body.storeName || !isNaN(req.body.storeName)){
-		res.send(404,{'message':'Enter valid Store name value'}); return;
+		res.send(400,{'message':'Enter valid Store name value'}); return;
 	}
 	if(!req.body.lat || isNaN(req.body.lat)){
-		res.send(404,{'message':'Enter valid latitude value'}); return;
+		res.send(400,{'message':'Enter valid latitude value'}); return;
 	}
 	if(!req.body.lon || isNaN(req.body.lon)){
-		res.send(404,{'message':'Enter valid longitude value'}); return;
+		res.send(400,{'message':'Enter valid longitude value'}); return;
 	}
 	var pos = [req.body.lon,req.body.lat];
 
@@ -87,10 +96,10 @@ exports.findStore = function(req,res){
 	var zipcode = req.body.zipcode;
 	var distance = req.body.distance;
 	if(zipcode == null || isNaN(zipcode)){
-		res.send(404,{'message':'Enter valid zipcode'}); return;
+		res.send(400,{'message':'Enter valid zipcode'}); return;
 	}
 	if(distance == null || isNaN(distance) ){
-		res.send(404,{'message':'Enter valid distance'}); return;
+		res.send(400,{'message':'Enter valid distance'}); return;
 	}
 	var p = new Promise(function(resolve, reject){
 		var location = zipcodes.lookup(zipcode);
@@ -129,7 +138,7 @@ exports.findStore = function(req,res){
 		});
 
 	}).catch(function(error){
-		res.send(405,{'message':'No location found for given zipcode'});
+		res.send(400,{'message':'No location found for given zipcode'});
 	});
 
 }
