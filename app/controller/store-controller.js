@@ -20,7 +20,7 @@ exports.saveStore = function(req,res){
 						storeName : req.body.storeName,
 						position:[req.body.lon, req.body.lat]
 				   }
-	stores.find(storeDoc,function(err, allStores) { console.log(allStores)
+	stores.find(storeDoc,function(err, allStores) {
 		if(allStores.length > 0){
 			res.status(400).send({'message':'Store already exists'});
 			return;
