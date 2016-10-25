@@ -17,7 +17,7 @@ exports.saveStore = function(req,res){
 	}
 	stores.create({
 		storeName : req.body.storeName,
-		position:[req.body.lat, req.body.lon]
+		position:[req.body.lon, req.body.lat]
 	}, function(err, store) {
 		if (err)
 			res.send(err);
@@ -67,7 +67,7 @@ exports.updateStore = function(req,res){
 	if(!req.body.lon || isNaN(req.body.lon)){
 		res.send(404,{'message':'Enter valid longitude value'}); return;
 	}
-	var pos = [req.body.lat,req.body.lon];
+	var pos = [req.body.lon,req.body.lat];
 
 	stores.update({_id:id}, 
 		{$set:{storeName : req.body.storeName, position : pos}}, 
@@ -108,7 +108,7 @@ exports.findStore = function(req,res){
 		var locState = loc.state;
 		var distInMiles = distance/3963.2;
 
-		var query = {'position': { '$geoWithin': { '$center': [[lat, lon] ,distInMiles] } } };
+		var query = {'position': { '$geoWithin': { '$centerSphere': [[parseFloat(lon), parseFloat(lat)] , distInMiles] } } };
 		stores.find(query,  function(err, storesInRange) {
 			if (err){
 				res.send(err)

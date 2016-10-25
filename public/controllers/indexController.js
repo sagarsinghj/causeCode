@@ -53,7 +53,6 @@ angular.module('storeFinder', []).controller("mainController",  function($scope,
 	$scope.findStores = function() {
 	$http.post('/api/findStore', $scope.fdata)
 		.success(function(data) {
-			$scope.fdata = {};
 			$scope.sdata = data.stores;
 			$scope.zipcodeCity = data.zipcodeCity;
 			$scope.zipcodeState = data.zipcodeState;
