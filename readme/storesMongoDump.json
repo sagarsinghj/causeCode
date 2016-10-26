@@ -1,0 +1,12 @@
+{"_id":{"$oid":"580f3b9633b133208ce8ef49"},"position":[-76.50346,38.98076],"storeName":"Store 1"}
+{"_id":{"$oid":"580f3bb533b133208ce8ef4a"},"position":[-76.53059,38.99624],"storeName":"Store 2"}
+{"_id":{"$oid":"580f3bd433b133208ce8ef4b"},"position":[-76.55239,39.02011],"storeName":"Store 3"}
+{"_id":{"$oid":"580f3fb379fbb820b4db17ea"},"position":[-76.5299,39.05265],"storeName":"Store 4"}
+{"_id":{"$oid":"580f6155ddb0cc212cf36f44"},"position":[-93.39151,44.67243],"storeName":"Store One"}
+{"_id":{"$oid":"580f616bddb0cc212cf36f45"},"position":[-93.34722,44.66108],"storeName":"Store Two"}
+{"_id":{"$oid":"580f6185ddb0cc212cf36f46"},"position":[-93.25641,44.70404],"storeName":"Store Three"}
+{"_id":{"$oid":"580f619bddb0cc212cf36f47"},"position":[-93.77243,44.81204],"storeName":"Store Four"}
+{"_id":{"$oid":"580f71d4ddb0cc212cf36f48"},"position":[-118.2855,34.04497],"storeName":"Apple Store"}
+{"_id":{"$oid":"580f71edddb0cc212cf36f49"},"position":[-118.17598,34.05265],"storeName":"Nokia Store"}
+{"_id":{"$oid":"580f7204ddb0cc212cf36f4a"},"position":[-118.20499,34.12686],"storeName":"Samsung Store"}
+{"_id":{"$oid":"580f721addb0cc212cf36f4b"},"position":[-118.05152,34.12317],"storeName":"Motorola Store"}
